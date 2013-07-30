@@ -4,6 +4,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js'></script>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <!--[if lte IE 8]>
     <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
   <![endif]-->
@@ -13,9 +14,34 @@
   </style>
 </head>
 <body>
-<div id='map'></div>
+
+
+<div id='map'>
+
+  <!-- <div class="leaflet-control-mapbox-geocoder leaflet-bar leaflet-control"><a class="leaflet-control-mapbox-geocoder-toggle mapbox-icon mapbox-icon-geocoder" href="#">&nbsp;</a><div class="leaflet-control-mapbox-geocoder-results"></div><div class="leaflet-control-mapbox-geocoder-wrap"><form class="leaflet-control-mapbox-geocoder-form"><input class="" type="text" placeholder="Search"></form></div></div>
+ -->
+</div>
 <script type='text/javascript'>
 var map = L.mapbox.map('map', 'maptap.map-ljig9nyp');
+  var gridLayer = L.mapbox.gridLayer('maptap.map-ljig9nyp');
+map.addLayer(L.mapbox.tileLayer('maptap.map-ljig9nyp'));
+map.addLayer(gridLayer);
+map.addControl(L.mapbox.gridControl(gridLayer));
 </script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $.ajax({
+  url: 'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
+  dataType: 'jsonp',
+  jsonpCallback: 'grid',
+  success: function(data) {
+    console.log(data);
+  }
+});
+});
+</script>
+
+
 </body>
 </html>
