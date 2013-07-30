@@ -27,12 +27,13 @@ var map = L.mapbox.map('map', 'maptap.map-ljig9nyp');
 map.addLayer(L.mapbox.tileLayer('maptap.map-ljig9nyp'));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));
+map.addControl(L.mapbox.geocoderControl('maptap.map-ljig9nyp'));
 </script>
 
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajax({
-  url: 'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
+  url: 'https://raw.github.com/mapbox/geo-googledocs/master/MapBox.js',
   dataType: 'jsonp',
   jsonpCallback: 'grid',
   success: function(data) {
